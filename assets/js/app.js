@@ -16,7 +16,7 @@ var height = svgHeight - margin.top - margin.bottom;
 // Create an SVG wrapper, append an SVG group that will hold our chart,
 // and shift the latter by left and top margins.
 var svg = d3
-  .select(".chart")
+  .select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -27,6 +27,7 @@ var chartGroup = svg.append("g")
 
 // Initial Params
 var chosenXAxis = "hair_length";
+var chosenYAxis = "";
 
 // function used for updating x-scale var upon click on axis label
 function xScale(hairData, chosenXAxis) {
@@ -41,8 +42,20 @@ function xScale(hairData, chosenXAxis) {
 
 }
 
+function yScale(hairData, chosenYAxis) {
+    // create scales
+    var yLinearScale = d3.scaleLinear()
+      .domain([0,
+        d3.max(hairData, d => d[chosenYAxis]) * 1.2
+      ])
+      .range([height, 0]);
+  
+    return yLinearScale;
+
+}
+
 // function used for updating xAxis var upon click on axis label
-function renderAxes(newXScale, xAxis) {
+function renderXAxis(newXScale, xAxis) {
   var bottomAxis = d3.axisBottom(newXScale);
 
   xAxis.transition()
@@ -51,6 +64,17 @@ function renderAxes(newXScale, xAxis) {
 
   return xAxis;
 }
+
+// function used for updating xAxis var upon click on axis label
+function renderYAxes(newYScale, yAxis) {
+    var leftAxis = d3.axisLeft(newYScale);
+  
+    yAxis.transition()
+      .duration(1000)
+      .call(leftAxis);
+  
+    return yAxis;
+  }
 
 // function used for updating circles group with a transition to
 // new circles
@@ -76,7 +100,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
   }
 
   var toolTip = d3.tip()
-    .attr("class", "tooltip")
+    .attr("class", "d3-tip")
     .offset([80, -60])
     .html(function(d) {
       return (`${d.rockband}<br>${label} ${d[chosenXAxis]}`);
@@ -96,7 +120,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 }
 
 // Retrieve data from the CSV file and execute everything below
-d3.csv("hairData.csv").then(function(hairData, err) {
+d3.csv("./assets/data/data.csv").then(function(hairData, err) {
   if (err) throw err;
 
   // parse data
@@ -134,7 +158,7 @@ d3.csv("hairData.csv").then(function(hairData, err) {
     .enter()
     .append("circle")
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
-    .attr("cy", d => yLinearScale(d.num_hits))
+    .attr("cy", d => yLinearScale(d[chosenYAxis]))
     .attr("r", 20)
     .attr("fill", "pink")
     .attr("opacity", ".5");
