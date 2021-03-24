@@ -102,7 +102,7 @@ function renderYaxisCircles(circlesGroup, newYScale, chosenYAxis)  {
 
 // function used to updating circles group in X axis
 // new circles
-function renderXAxisText(circleLabels, newXScale, chosenXAxis) {
+function renderXaxisText(circleLabels, newXScale, chosenXAxis) {
 
     circleLabels.transition()
     .duration(1000)
