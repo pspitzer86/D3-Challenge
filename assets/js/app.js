@@ -125,9 +125,30 @@ function renderYaxisText(circleLabels, newYScale, chosenYAxis) {
 
 
 // function used for updating circles group with new tooltip
-function updateToolTip(chosenXAxis, circlesGroup) {
+function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
-  var label;
+  var xlabel;
+  var ylabel;
+
+  var xunits;
+  var yunits;
+
+  // set x axis
+
+  switch(chosenXAxis) {
+      case "poverty":
+          xlabel = "Poverty";
+          xunits = "%";
+          break;
+      case "age":
+          xlabel = "Median Age";
+          xunits = "";
+          break;
+      case "income":
+          xlabel = "Median Income";
+          xunits = "";
+  }
+
 
   if (chosenXAxis === "hair_length") {
     label = "Hair Length:";
