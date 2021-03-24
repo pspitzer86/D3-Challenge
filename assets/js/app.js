@@ -95,10 +95,23 @@ function renderYaxisCircles(circlesGroup, newYScale, chosenYAxis)  {
 
     circlesGroup.transition()
     .duration(1000)
-    .attr("cy", d => newYScale(d[chsenYAxis]));
+    .attr("cy", d => newYScale(d[chosenYAxis]));
 
     return circlesGroup;
 }
+
+// function used to updating circles group in X axis
+// new circles
+function renderXAxisText(circleLabels, newXScale, chosenXAxis) {
+
+    circleLabels.transition()
+    .duration(1000)
+    .attr("x", d => newXScale(d[chosenXAxis]));
+
+    return circleLabels;
+}
+
+
 
 // function used for updating circles group with new tooltip
 function updateToolTip(chosenXAxis, circlesGroup) {
