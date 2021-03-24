@@ -111,6 +111,17 @@ function renderXAxisText(circleLabels, newXScale, chosenXAxis) {
     return circleLabels;
 }
 
+// function used for updating circles group in Y axis
+// new circles
+function renderYaxisText(circleLabels, newYScale, chosenYAxis) {
+
+    circleLabels.transition()
+    .duration(1000)
+    .attr("y", d => newYScale(d[chosenYAxis]));
+
+    return circleLabels;
+}
+
 
 
 // function used for updating circles group with new tooltip
