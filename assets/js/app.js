@@ -26,8 +26,8 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Initial Params
-var chosenXAxis = "hair_length";
-var chosenYAxis = "";
+var chosenXAxis = "poverty";
+var chosenYAxis = "healthcare";
 
 
 
