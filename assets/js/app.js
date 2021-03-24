@@ -29,6 +29,8 @@ var chartGroup = svg.append("g")
 var chosenXAxis = "hair_length";
 var chosenYAxis = "";
 
+
+
 // function used for updating x-scale var upon click on axis label
 function xScale(censusData, chosenXAxis) {
   // create scales
@@ -78,7 +80,7 @@ function renderYAxes(newYScale, yAxis) {
 
 // function used for updating circles group with a transition to
 // new circles
-function renderCircles(circlesGroup, newXScale, chosenXAxis) {
+function renderXaxisCircles(circlesGroup, newXScale, chosenXAxis) {
 
   circlesGroup.transition()
     .duration(1000)
