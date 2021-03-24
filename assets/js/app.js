@@ -139,15 +139,15 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
   switch(chosenXAxis) {
       case "poverty":
-          xlabel = "Poverty";
+          xlabel = "Poverty: ";
           xunits = "%";
           break;
       case "age":
-          xlabel = "Median Age";
+          xlabel = "Median Age: ";
           xunits = "";
           break;
       case "income":
-          xlabel = "Median Income";
+          xlabel = "Median Income: $";
           xunits = "";
   }
 
@@ -155,15 +155,15 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
   switch(chosenYAxis) {
       case "healthcare":
-          ylabel = "Lacks Healthcare";
+          ylabel = "Lacks Healthcare: ";
           yunits = "%";
           break;
       case "smokes":
-          ylabel = "Smokes";
+          ylabel = "Smokes: ";
           yunits = "%";
           break;
       case "obesity":
-          ylabel = "Obesity";
+          ylabel = "Obesity: ";
           yunits = "%";
   }
 
