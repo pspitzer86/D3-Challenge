@@ -127,6 +127,8 @@ function renderYaxisText(circleLabels, newYScale, chosenYAxis) {
 // function used for updating circles group with new tooltip
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
+  // creating variables to help create axes
+
   var xlabel;
   var ylabel;
 
@@ -149,12 +151,20 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
           xunits = "";
   }
 
+  // set y axis 
 
-  if (chosenXAxis === "hair_length") {
-    label = "Hair Length:";
-  }
-  else {
-    label = "# of Albums:";
+  switch(chosenYAxis) {
+      case "healthcare":
+          ylabel = "Lacks Healthcare";
+          yunits = "%";
+          break;
+      case "smokes":
+          ylabel = "Smokes";
+          yunits = "%";
+          break;
+      case "obesity":
+          ylabel = "Obesity";
+          yunits = "%";
   }
 
   var toolTip = d3.tip()
