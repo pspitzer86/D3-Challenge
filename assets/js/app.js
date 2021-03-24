@@ -78,7 +78,7 @@ function renderYAxes(newYScale, yAxis) {
     return yAxis;
   }
 
-// function used for updating circles group with a transition to
+// function used for updating circles group in x axis with a transition to
 // new circles
 function renderXaxisCircles(circlesGroup, newXScale, chosenXAxis) {
 
@@ -87,6 +87,17 @@ function renderXaxisCircles(circlesGroup, newXScale, chosenXAxis) {
     .attr("cx", d => newXScale(d[chosenXAxis]));
 
   return circlesGroup;
+}
+
+// function used for updating circles group in y axis
+// new circles
+function renderYaxisCircles(circlesGroup, newYScale, chosenYAxis)  {
+
+    circlesGroup.transition()
+    .duration(1000)
+    .attr("cy", d => newYScale(d[chsenYAxis]));
+
+    return circlesGroup;
 }
 
 // function used for updating circles group with new tooltip
