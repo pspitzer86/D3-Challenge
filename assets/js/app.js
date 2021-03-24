@@ -236,9 +236,27 @@ d3.csv("./assets/data/data.csv").then(function(censusData) {
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
     .attr("r", radius);
 
-  // Create group for two x-axis labels
-  var labelsGroup = chartGroup.append("g")
+  // state abbreviation creation
+
+  var circleLabels = chartGroup.selectAll(null).data(censusData).enter().append("text");
+
+  // add labels in circles
+
+  circleLabels
+     .classed("stateText", true)
+     .attr("x", d => xLinearScale(d[chosenXAxis]))
+     .attr("y", d => yLinearScale(d[chosenYAxis]))
+     .attr("dy", "0.4em")
+     .style("font-size", radius*0.8)
+     .text(d => d.abbr);
+
+  // Create group for x-axis labels
+  var xlabelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
+
+  // Create group for y-axis labels
+  var ylabelsGroup = chartGroup.append("g")
+    .attr("transform", "rotate(-90)");
 
   var hairLengthLabel = labelsGroup.append("text")
     .attr("x", 0)
