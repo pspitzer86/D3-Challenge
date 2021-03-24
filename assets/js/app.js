@@ -203,13 +203,10 @@ d3.csv("./assets/data/data.csv").then(function(censusData) {
     data.obesity = +data.obesity;
   });
 
-  // xLinearScale function above csv import
-  var xLinearScale = xScale(hairData, chosenXAxis);
+  // create linear scale from functions
 
-  // Create y scale function
-  var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(hairData, d => d.num_hits)])
-    .range([height, 0]);
+  var xLinearScale = xScale(censusData, chosenXAxis);
+  var yLinearScale = yScale(censusData, chosenYAxis);
 
   // Create initial axis functions
   var bottomAxis = d3.axisBottom(xLinearScale);
@@ -217,24 +214,27 @@ d3.csv("./assets/data/data.csv").then(function(censusData) {
 
   // append x axis
   var xAxis = chartGroup.append("g")
-    .classed("x-axis", true)
+    .classed("chart", true)
     .attr("transform", `translate(0, ${height})`)
     .call(bottomAxis);
 
   // append y axis
-  chartGroup.append("g")
-    .call(leftAxis);
+  var yAxis = chartGroup.append("g")
+  .call(leftAxis);
+
+  // set circle radius
+
+  var radius = 15;
 
   // append initial circles
   var circlesGroup = chartGroup.selectAll("circle")
-    .data(hairData)
+    .data(censusData)
     .enter()
     .append("circle")
+    .clased("stateCircle", true)
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
-    .attr("r", 20)
-    .attr("fill", "pink")
-    .attr("opacity", ".5");
+    .attr("r", radius);
 
   // Create group for two x-axis labels
   var labelsGroup = chartGroup.append("g")
