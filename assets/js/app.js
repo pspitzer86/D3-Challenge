@@ -123,7 +123,6 @@ function renderYaxisText(circleLabels, newYScale, chosenYAxis) {
 }
 
 
-
 // function used for updating circles group with new tooltip
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
@@ -167,18 +166,22 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
           yunits = "%";
   }
 
+  // create tooltip function
+
   var toolTip = d3.tip()
     .attr("class", "d3-tip")
     .offset([80, -60])
     .html(function(d) {
-      return (`${d.rockband}<br>${label} ${d[chosenXAxis]}`);
+      return (`${d.state}<br>${xlabel}${d[chosenXAxis]}${xunits}<br>${ylabel}${d[chosenYAxis]}${yunits}`);
     });
+
+  // create tooltips
 
   circlesGroup.call(toolTip);
 
   circlesGroup.on("mouseover", function(data) {
     toolTip.show(data);
-  })
+    })
     // onmouseout event
     .on("mouseout", function(data, index) {
       toolTip.hide(data);
