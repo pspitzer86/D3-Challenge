@@ -191,7 +191,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 }
 
 // Retrieve data from the CSV file and execute everything below
-d3.csv("./assets/data/data.csv").then(function(hairData, err) {
+d3.csv("./assets/data/data.csv").then(function(censusData) {
   if (err) throw err;
 
   // parse data
