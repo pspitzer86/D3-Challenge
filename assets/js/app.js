@@ -192,13 +192,15 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
 // Retrieve data from the CSV file and execute everything below
 d3.csv("./assets/data/data.csv").then(function(censusData) {
-  if (err) throw err;
 
   // parse data
-  hairData.forEach(function(data) {
-    data.hair_length = +data.hair_length;
-    data.num_hits = +data.num_hits;
-    data.num_albums = +data.num_albums;
+  censusData.forEach(function(data) {
+    data.poverty = +data.poverty;
+    data.age = +data.age;
+    data.income = +data.income;
+    data.healthcare = +data.healthcare;
+    data.smokes = +data.smokes;
+    data.obesity = +data.obesity;
   });
 
   // xLinearScale function above csv import
