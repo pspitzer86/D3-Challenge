@@ -1,3 +1,5 @@
+// In collaboration with Kate Spitzer
+
 
 // function used for updating x scale var upon click on axis label
 
@@ -504,7 +506,7 @@ d3.csv("./assets/data/data.csv").then(function(censusData) {
 					  		.classed("active", false)
 					  		.classed("inactive", true);
 				  		break;
-						  
+
 			  		case "obesity":
 				  		healthcareLabel
 							.classed("active", false)
