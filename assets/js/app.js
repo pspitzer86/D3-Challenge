@@ -1,42 +1,12 @@
-// set chart size
-
-var svgWidth = 1300;
-var svgHeight = 750;
-
-var margin = {
-  top: 20,
-  right: 40,
-  bottom: 100,
-  left: 120
-};
-
-var width = svgWidth - margin.left - margin.right;
-var height = svgHeight - margin.top - margin.bottom;
-
-// Create an SVG wrapper, append an SVG group that will hold our chart,
-// and shift the latter by left and top margins.
-var svg = d3
-  .select("#scatter")
-  .append("svg")
-  .attr("width", svgWidth)
-  .attr("height", svgHeight);
-
-// Append an SVG group
-var chartGroup = svg.append("g")
-  .attr("transform", `translate(${margin.left}, ${margin.top})`);
-
-// Initial Params
-var chosenXAxis = "poverty";
-var chosenYAxis = "healthcare";
-
-
-
 // function used for updating x-scale var upon click on axis label
+
 function xScale(censusData, chosenXAxis) {
+
   // create scales
+
   var xLinearScale = d3.scaleLinear()
-    .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.8,
-      d3.max(censusData, d => d[chosenXAxis]) * 1.2
+    .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.95,
+      d3.max(censusData, d => d[chosenXAxis]) * 1.05
     ])
     .range([0, width]);
 
@@ -45,18 +15,19 @@ function xScale(censusData, chosenXAxis) {
 }
 
 function yScale(censusData, chosenYAxis) {
+
     // create scales
+
     var yLinearScale = d3.scaleLinear()
-      .domain([0,
-        d3.max(censusData, d => d[chosenYAxis]) * 1.2
+      .domain([0, d3.max(censusData, d => d[chosenYAxis]) * 1.05
       ])
       .range([height, 0]);
   
     return yLinearScale;
-
 }
 
 // function used for updating xAxis var upon click on axis label
+
 function renderXAxis(newXScale, xAxis) {
   var bottomAxis = d3.axisBottom(newXScale);
 
@@ -68,6 +39,7 @@ function renderXAxis(newXScale, xAxis) {
 }
 
 // function used for updating xAxis var upon click on axis label
+
 function renderYAxis(newYScale, yAxis) {
     var leftAxis = d3.axisLeft(newYScale);
   
@@ -80,6 +52,7 @@ function renderYAxis(newYScale, yAxis) {
 
 // function used for updating circles group in x axis with a transition to
 // new circles
+
 function renderXaxisCircles(circlesGroup, newXScale, chosenXAxis) {
 
   circlesGroup.transition()
@@ -190,6 +163,38 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
   return circlesGroup;
 }
 
+// set chart size
+
+var svgWidth = 1300;
+var svgHeight = 750;
+
+var margin = {
+  top: 20,
+  right: 40,
+  bottom: 100,
+  left: 120
+};
+
+var width = svgWidth - margin.left - margin.right;
+var height = svgHeight - margin.top - margin.bottom;
+
+// Create an SVG wrapper, append an SVG group that will hold our chart,
+// and shift the latter by left and top margins.
+var svg = d3
+  .select("#scatter")
+  .append("svg")
+  .attr("width", svgWidth)
+  .attr("height", svgHeight);
+
+// Append an SVG group
+var chartGroup = svg.append("g")
+  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// Initial Params
+var chosenXAxis = "poverty";
+var chosenYAxis = "healthcare";
+
+
 // Retrieve data from the CSV file and execute everything below
 d3.csv("./assets/data/data.csv").then(function(censusData) {
 
@@ -231,7 +236,7 @@ d3.csv("./assets/data/data.csv").then(function(censusData) {
     .data(censusData)
     .enter()
     .append("circle")
-    .clased("stateCircle", true)
+    .classed("stateCircle", true)
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
     .attr("r", radius);
@@ -292,6 +297,7 @@ d3.csv("./assets/data/data.csv").then(function(censusData) {
     .attr("y", 0 - margin.left)
     .attr("x", 0 - (height/2))
     .attr("value", "healthcare") // value to grab for event listener
+    .attr("dy", "5.5em")
     .classed("active", true)
     .classed("aText", true)
     .text("Lacks Healthcare (%)");
@@ -300,6 +306,7 @@ d3.csv("./assets/data/data.csv").then(function(censusData) {
     .attr("y", 0 - margin.left)
     .attr("x", 0 - (height/2))
     .attr("value", "smokes") // value to grab for event listener
+    .attr("dy", "4.2em")
     .classed("inactive", true)
     .classed("aText", true)
     .text("Smokes (%)");
@@ -308,6 +315,7 @@ d3.csv("./assets/data/data.csv").then(function(censusData) {
     .attr("y", 0 - margin.left)
     .attr("x", 0 - (height/2))
     .attr("value", "obesity") // value to grab for event listener
+    .attr("dy", "2.9em")
     .classed("inactive", true)
     .classed("aText", true)
     .text("Obesity (%)");
