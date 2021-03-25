@@ -110,14 +110,17 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
   // set x axis
 
   switch(chosenXAxis) {
+
       case "poverty":
           xlabel = "Poverty: ";
           xunits = "%";
           break;
+
       case "age":
           xlabel = "Median Age: ";
           xunits = "";
           break;
+          
       case "income":
           xlabel = "Median Income: $";
           xunits = "";
@@ -126,14 +129,17 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
   // set y axis 
 
   switch(chosenYAxis) {
+
       case "healthcare":
           ylabel = "Lacks Healthcare: ";
           yunits = "%";
           break;
+
       case "smokes":
           ylabel = "Smokes: ";
           yunits = "%";
           break;
+
       case "obesity":
           ylabel = "Obesity: ";
           yunits = "%";
@@ -476,7 +482,7 @@ d3.csv("./assets/data/data.csv").then(function(censusData) {
                     .classed("active", false)
                     .classed("inactive", true);
                 break;
-                
+
             case "obesity":
                 healthcareLabel
                     .classed("active", false)
